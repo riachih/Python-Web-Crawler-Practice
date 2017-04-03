@@ -9,8 +9,8 @@ import requests
 
 def get_link(url):
     wb_data = requests.get(url)
-    soup = BeautifulSoup(wb_data.text, 'lxml')  # 使得网页可读
-    links = soup.select("#page_list > ul > li > a")  # 返回一个列表 #notice
+    soup = BeautifulSoup(wb_data.text, 'lxml')
+    links = soup.select("#page_list > ul > li > a")
     for link in links:
         href = link.get("href")  # !! notice
         get_data(href)
@@ -27,12 +27,11 @@ def get_data(href):
     url = href
 
     wb_data = requests.get(url)
-    soup = BeautifulSoup(wb_data.text, 'lxml')  # 使得网页可读
+    soup = BeautifulSoup(wb_data.text, 'lxml')
 
     titles = soup.select(' div.pho_info > h4 > em')
 
-    addresss = soup.select('span.pr5')  # 不能用selector
-    # span.pr5  这种也行
+    addresss = soup.select('span.pr5')
 
     prices = soup.select("#pricePart > div.day_l > span")  # this works
 
